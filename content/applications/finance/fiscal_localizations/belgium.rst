@@ -2,6 +2,282 @@
 Belgium
 =======
 
+Configuration
+=============
+
+:ref:`Install <general/install>` the following modules to get all the features of the Belgian
+localization, following the :abbr:`IFRS(International Financial Reporting Standards)` rules.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Name
+     - Technical name
+     - Description
+   * - :guilabel:`Belgium - Accounting`
+     - `l10n_be`
+     - Installing this module grants you access to the basic accounting features for Belgium,
+       including Belgian taxes, Chart of accounts and fiscal positions.
+   * - :guilabel:`Belgium - Accounting Reports`
+     - `l10n_be_reports`
+     - Installing this module grants you access to specific accounting reports for Belgium.
+   * - :guilabel:`Belgium - Accounting Reports (post wizard)`
+     - `l10n_be_reports_post_wizard`
+     - Installing this module enables the VAT wizard when posting a tax return journal entry.
+   * - :guilabel:`Belgium - Import Bank CODA Statements`
+     - `l10n_be_coda`
+     - Installing this module allows you to import CODA bank statements.
+   * - :guilabel:`Belgium - Import SODA files`
+     - `l10n_be_soda`
+     - Installing this module allows you to import SODA files.
+   * - :guilabel:`Belgium - Disallowed Expenses Data`
+     - `l10n_be_disallowed_expenses`
+     - Installing this module grants you access to the use of disallowed expenses features.
+   * - :guilabel:`Belgium - Payroll`
+     - `l10n_be_hr_payroll`
+     - Installing this module grants you access to the basic payroll features for Belgium.
+   * - :guilabel:`Belgium - Payroll with Accounting`
+     - `l10n_be_hr_payroll_account`
+     - Installing this module enables the integration of accounting data with payroll.
+   * - :guilabel:`Belgium - Payroll - Dimona`
+     - `l10n_be_hr_payroll_dimona`
+     - Installing this module grants you access to Dimona features for payroll.
+   * - :guilabel:`Belgium - Payroll - Fleet`
+     - `l10n_be_hr_payroll_fleet`
+     - Installing this module grants you access to fleet features for payroll.
+   * - :guilabel:`Salary Configurator (Belgium)`
+     - `l10n_be_hr_contract_salary`
+     -  Installing this module grants you access to the salary configurator feature.
+
+Chart of accounts
+=================
+
+You can reach the :guilabel:`Chart of accounts` by going to :menuselection:`Accounting -->
+Configuration --> Accounting: Chart of Accounts`.
+
+The Belgian :guilabel:`Chart of accounts` includes pre-configured accounts as described in the
+:abbr:`PCMN(Plan Comptable Minimum Normalisé)`. To add a new account, click :guilabel:`New`. A new
+line appears. Fill it in, :guilabel:`Save` and click :guilabel:`Setup` to configure it further.
+
+.. seealso::
+   :doc:`../accounting/get_started/chart_of_accounts`
+
+Taxes
+=====
+
+Default Belgian taxes are created automatically when the :guilabel:`Belgium - Accounting` and
+the :guilabel:`Belgium - Accounting Reports` modules are installed. Each tax impacts the Belgian
+:guilabel:`Tax Report`, available by going to :menuselection:`Accounting --> Reporting -->
+Statements Reports: Tax Report`.
+
+In Belgium, the standard rate is **21%**, but there are lower rates for some categories of goods
+and services. A rate of **12%** is applied on social housing and food served in restaurants, while a
+rate of **6%** applies to most basic goods, such as food, water supply, books, and medicine. A
+**0%** rate is available on some daily and weekly publications, as well as recycled goods.
+
+Non-deductible taxes
+--------------------
+
+In Belgium, some taxes are not fully deductible, such as taxes on the maintenance of cars. This
+means a part of these taxes is considered as an expense.
+
+In Odoo, you can configure non-deductible taxes by creating tax rules for these taxes and linking
+them to the corresponding accounts. This way, the system automatically calculates the taxes and
+allocates them to the appropriate accounts.
+
+To configure a new non-deductible tax, go to :menuselection:`Accounting --> Configuration -->
+Accounting: Taxes`, and click :guilabel:`New`:
+
+#. :guilabel:`Add a line` and select :guilabel:`Base` in the :guilabel:`Based On` column;
+#. :guilabel:`Add a line`, then select :guilabel:`on tax` in the :guilabel:`Based on` column and
+   enter the **non-deductible** percentage in the :guilabel:`%` column;
+#. On the :guilabel:`of tax` line, select the :guilabel:`Tax Grid(s)` related to your tax;
+#. :guilabel:`Add a line` with the **deductible** percentage in the :guilabel:`%` column;
+#. Set :guilabel:`of tax` in :guilabel:`Based On`;
+#. Select :guilabel:`411000 VAT recoverable` as account, and select the related tax grid.
+
+Once you have created a non-deductible tax, you can apply it to your transactions by selecting the
+appropriate tax during the encoding of bills and credit notes. The system automatically calculates
+the tax amount and allocates it to the corresponding accounts based on the tax rules configured.
+
+.. example::
+   With the Belgian localization, the **21% car** tax is created by default (50% non-deductible).
+
+   .. image:: belgium/deductible-tax.png
+      :alt: Example of not-fully deductible tax
+
+.. seealso::
+  - :doc:`Taxes <../accounting/taxes>`
+  - :doc:`../accounting/reporting/tax_returns`
+
+Reports
+=======
+
+Here is the list of Belgian-specific reports available on Odoo Enterprise:
+
+- Balance sheet;
+- Profit & loss;
+- Tax report;
+- Partner VAT Listing;
+- EC Sales List;
+- Intrastat.
+
+You can access Belgian-specific versions of reports by clicking on the **book** icon when on a
+report and selecting its Belgian version: **(BE)**.
+
+.. image:: belgium/belgian-reports.png
+   :alt: Belgian version of reports
+
+.. seealso::
+   :doc:`../accounting/reporting`
+
+Disallowed expenses report
+--------------------------
+
+**Disallowed expenses** are expenses that can be deducted from your accounting result but not from
+your fiscal result.
+
+The :guilabel:`Disallowed Expenses Report` is available by going to
+:menuselection:`Accounting --> Reporting --> Management: Disallowed Expenses`. It allows financial
+results in real-time, and periodic changes. This report is generated based on the
+:guilabel:`Disallowed Expenses Categories`, that you can reach by going to
+:menuselection:`Accounting --> Configuration --> Management: Disallowed Expenses Categories`. Some
+categories already exist by default but do not have any rates. Click on :guilabel:`Set Rates` to
+update a specific category.
+
+.. tip::
+  - You can add multiple rates for various dates. In that case, the rate used to calculate the
+    expense depends on the date at which it is calculated, and the rate set for that date.
+  - If you have the **Fleet** app installed, tick the :guilabel:`Car Category` box when applicable.
+    This makes the vehicle mandatory while booking a vendor bill.
+
+To link a :guilabel:`Disallowed Expenses Category` with a specific account, go to
+:menuselection:`Accounting --> Configuration --> Acounting: Chart of Accounts`. Find the account you
+want, and click on :guilabel:`Setup`. Add the :guilabel:`Disallowed Expense category` in the
+:guilabel:`Disallowed Expenses` field. From now, when an expense is created with this account, the
+disallowed expense is calculated based on the rate mentioned in the
+:guilabel:`Disallowed Expense category`.
+
+Let’s take an example reflecting **restaurant** and **car expenses**.
+
+Restaurant expenses
+~~~~~~~~~~~~~~~~~~~
+
+In Belgium, 31% of **restaurants** expenses are non-deductible. Create a new **disallowed expenses
+category** and set both :guilabel:`Related Account(s)` and :guilabel:`Current Rate`.
+
+.. image:: belgium/restaurant-expenses.png
+   :alt: Disallowed expenses categories
+
+Car expenses: vehicle split
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In Belgium, the deductible percentage varies from car to car and, therefore, should be indicated for
+each vehicle. To do so, go to the :guilabel:`Fleet` app and select a vehicle. In the
+:guilabel:`Tax info` tab, go to the :guilabel:`Disallowed Expenses Rate` section and click on
+:guilabel:`Add a line`. Add a :guilabel:`Start Date` and a :guilabel:`%`. The amounts goes in the
+same account for all car expenses.
+
+When you create a bill for car expenses, you can link each expense to a specific car by filling the
+:guilabel:`Vehicle` column, so the right percentage is applied.
+
+.. image:: belgium/car-bill.png
+   :alt: Disallowed expenses categories
+
+The :guilabel:`vehicle split` option available in the :guilabel:`Disallowed Expenses Report` allows
+you to see the rate and disallowed amount for each car.
+
+.. image:: belgium/vehicle-split.png
+   :alt: Disallowed expenses categories
+
+Fee form 281.50 and form 325
+============================
+
+Fee form 281.50
+---------------
+
+Annually, a **281.50 fee form** must be reported to the fiscal authorities. To do so, the tag
+`281.50` must be added on the **contact form** of the entities concerned by the **281.50** fee. To
+add the tag, go to the **Contacts** app, select the person or company you want to create a **281.50
+fee form** for, and add the `281.50` tag in the :guilabel:`Tags` field.
+
+.. image:: belgium/281-50.png
+   :alt: add the tag 281.50 on a contact form
+
+.. note::
+   Make sure the **street, zip code, country**, and **VAT number** are also informed on the
+   **Contact form**.
+
+Then, depending on the nature of the expense, add the corresponding `281.50` tag on the impact
+accounts. To do so, go to :menuselection:`Accounting --> Configuration --> Accounting: Chart of
+Accounts`, and click on :guilabel:`Setup` to add the corresponding `281.50` tag on the impacted
+accounts, ie.: :guilabel:`281.50 - Commissions`, depending on the nature of the expense.
+
+Form 325
+--------
+
+You can create a **325 form** by going to :menuselection:`Accounting --> Reporting --> Belgium:
+Create 325 form`. A new page pops up: select the right options and click :guilabel:`Generate 325
+form`. To open an already generated **325 form**, go to :menuselection:`Accounting --> Reporting -->
+Belgium: Open 325 forms`.
+
+.. image:: belgium/325-form.png
+   :alt: Add the tag 281-50 on a contact form
+
+CODA and SODA statements
+========================
+
+CODA
+----
+
+**CODA** is an electronic XML format used to import Belgian bank statements. You can download CODA
+files from your bank and import them directly into Odoo by clicking :guilabel:`Import Statement`
+from your :guilabel:`Bank` journal on your dashboard.
+
+.. image:: belgium/coda-import.png
+   :alt: Import CODA files
+
+.. note::
+   The :guilabel:`Belgium - Import Bank CODA Statements` module is installed by default when the
+   :guilabel:`Belgium - Accounting` and the :guilabel:`Belgium - Accounting Reports` modules are
+   installed.
+
+.. seealso::
+   :ref:`Import bank statements files <transactions/import>`
+
+SODA
+----
+
+**SODA** is an electronic XML format used to import accounting entries related to salaries. SODA
+files can be imported in the journal you use to record salaries by going to your Accounting
+**dashboard** and clicking :guilabel:`Upload` in the related journal card form.
+
+Once your **SODA** files are imported, the entries are created automatically in your 'salary'
+journal.
+
+.. image:: belgium/soda-import.png
+   :alt: Import SODA files
+
+Electronic invoicing
+====================
+
+Odoo supports the **E-FFF** and **Peppol BIS Billing 3.0 (UBL)** electronic invoicing formats. To
+enable them, go to :menuselection:`Accounting --> Configuration --> Journals --> Customer Invoices
+--> Advanced Settings --> Electronic Invoicing`, and tick :guilabel:`E-FFF (BE)` and
+:guilabel:`Peppol BIS Billing 3.0`.
+
+.. seealso::
+   :doc:`../accounting/customer_invoices/electronic_invoicing`
+
+Cash discount
+=============
+
+In Belgium, the tax is *always* calculated based on the product price after discount, whether it
+effectively applies or not.
+
+.. Seealso::
+   :doc:`../accounting/customer_invoices/cash_discounts`
+
 .. _belgium/introduction:
 
 Fiscal certification: POS restaurant
@@ -121,7 +397,6 @@ As a pre-requisite, :ref:`activate <general/install>` the `Belgian Registered Ca
 (technical name: `pos_blackbox_be`).
 
 .. image:: belgium/be-modules.png
-   :align: center
    :alt: black box modules for belgian fiscal certification
 
 Once the module is activated, add your VAT number to your company information. To set it up, go to
@@ -131,7 +406,6 @@ so, go to the :guilabel:`Employees` app and open an employee form. There, go to 
 settings tab --> Attendance/Point of Sale`, and fill in the :guilabel:`INSZ or BIS number` field.
 
 .. image:: belgium/bis-number.png
-   :align: center
    :alt: ISNZ or BIS number field on employee form
 
 .. tip::
@@ -160,7 +434,6 @@ database. To verify that the IoT Box recognizes the FDM, go to the IoT homepage 
 :guilabel:`IOT Device` section, which should display the FDM.
 
 .. image:: belgium/iot-devices.png
-   :align: center
    :alt: Hardware status page on a registered IoT Box
 
 Then, add the IoT to your POS. To do so, go to :menuselection:`Point of Sale --> Configuration -->

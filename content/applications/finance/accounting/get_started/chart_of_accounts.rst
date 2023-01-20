@@ -187,3 +187,5 @@ To do so, check the :guilabel:`Deprecated` box in the account's settings, and sa
    * :doc:`../vendor_bills/deferred_expenses`
    * :doc:`../customer_invoices/deferred_revenues`
    * :doc:`../../fiscal_localizations`
+   * `Odoo Tutorials | Chart of Accounts <https://www.youtube.com/watch?v=Q-M_wSuRw1M>`_
+   * `Odoo Tutorials | Update your Chart of Accounts <https://www.youtube.com/watch?v=8lQQBbv9aLQ>`_
